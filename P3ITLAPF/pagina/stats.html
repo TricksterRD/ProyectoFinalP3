@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Estadísticas de Productos</h1>
+<div class="stats">
+    <p><strong>Total de productos:</strong> {{ total_products }}</p>
+    <p><strong>Producto más caro:</strong>
+        {{ most_expensive.name if most_expensive else 'N/A' }}
+        (${{ most_expensive.price if most_expensive else 'N/A' }})
+    </p>
+    <p><strong>Producto más barato:</strong>
+        {{ cheapest.name if cheapest else 'N/A' }}
+        (${{ cheapest.price if cheapest else 'N/A' }})
+    </p>
+    <p><strong>Precio promedio:</strong> ${{ avg_price | round(2) }}</p>
+</div>
+<a href="{{ url_for('index') }}" class="btn btn-primary">Volver al listado</a>
+{% endblock %}

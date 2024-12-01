@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Listado de Productos</h1>
+<div class="filters">
+    <p>Ordenar por:</p>
+    <a href="{{ url_for('index', order_by='id') }}" class="btn btn-outline-primary">ID</a>
+    <a href="{{ url_for('index', order_by='name') }}" class="btn btn-outline-primary">Nombre</a>
+    <a href="{{ url_for('index', order_by='price') }}" class="btn btn-outline-primary">Precio</a>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Descripción</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+        <tr>
+            <td>{{ product.id }}</td>
+            <td>{{ product.name }}</td>
+            <td>${{ product.price }}</td>
+            <td>{{ product.description }}</td>
+            <td>
+                <a href="{{ url_for('view_product', id=product.id) }}" class="btn btn-info btn-sm">Ver</a>
+                <a href="{{ url_for('edit_product', id=product.id) }}" class="btn btn-warning btn-sm">Editar</a>
+                <a href="{{ url_for('delete_product', id=product.id) }}" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{{ url_for('add_product') }}" class="btn btn-success">Agregar Producto</a>
+<a href="{{ url_for('search_product') }}" class="btn btn-primary">Buscar Producto</a>
+{% endblock %}

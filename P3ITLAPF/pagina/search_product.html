@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Buscar Producto</h1>
+<form action="{{ url_for('search_product') }}" method="POST">
+    <div class="mb-3">
+        <label for="query" class="form-label">Buscar por nombre:</label>
+        <input type="text" class="form-control" id="query" name="query" placeholder="Nombre del producto">
+    </div>
+    <div class="mb-3">
+        <label for="min_price" class="form-label">Precio mínimo:</label>
+        <input type="number" class="form-control" id="min_price" name="min_price" step="0.01">
+    </div>
+    <div class="mb-3">
+        <label for="max_price" class="form-label">Precio máximo:</label>
+        <input type="number" class="form-control" id="max_price" name="max_price" step="0.01">
+    </div>
+    <button type="submit" class="btn btn-primary">Buscar</button>
+</form>
+
+{% if results %}
+<h2>Resultados de la búsqueda:</h2>
+<ul>
+    {% for product in results %}
+    <li>
+        <strong>{{ product.name }}</strong> - ${{ product.price }}
+        <a href="{{ url_for('view_product', id=product.id) }}" class="btn btn-secondary btn-sm">Ver</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}

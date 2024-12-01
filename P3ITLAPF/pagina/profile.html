@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Perfil de Usuario</h1>
+<p>Usuario: {{ current_user.username }}</p>
+<a href="{{ url_for('edit_profile') }}" class="btn btn-warning">Editar Perfil</a>
+{% endblock %}
